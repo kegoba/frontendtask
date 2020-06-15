@@ -1,0 +1,189 @@
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+.registered,.btn, input{
+   margin-top: 2%;
+  margin-bottom: 2%;
+
+}
+ .login-sm{
+  margin-left: 100px ;
+
+}
+
+
+
+
+.footer{
+  margin-top:10%;
+ 
+}
+
+.pay{
+  margin-top : 50px;
+}
+
+
+
+.footer, .menu{
+  background:#87ceeb;
+}
+
+.cart ,.gallary{
+  margin-top: 100px;
+}
+
+
+input[type="text"],
+input[type="file"],
+input[type="password"],
+.select [type="text"],
+.btn,
+button[type="submit"]{
+  margin-top:10px ;
+  width: 50%;
+  padding: 10px;
+  border-radius: 40px;
+  outline: none;
+  margin-top: 40px;
+  height: 60;
+
+ 
+}
+
+@media(max-width:700px){
+  input[type="text"],button[type="submit"],input[type="file"], 
+  .select[type="text"] , input[type="password"] , .btn{
+  margin:1px ;
+  width: 90%!important;
+  height: 80%;
+  padding: 1px;
+   border-radius: 40px;
+    outline: none;
+    margin-top: 40px;
+    height: 60px;
+  }
+}
+.SocialIcon{
+  margin: 10px;
+  padding: 10px;
+
+}
+
+
+@media (max-width:700px){
+.btn{
+  margin:10px ;
+  width: 90%;
+  padding: 10px;
+border-radius: 40px;
+height: 80%;
+outline: none;
+  
+  }
+}
+
+.comment, input{
+    text-align: center;
+    align-content: center;
+}
+
+.payment{
+margin-top: 50px;
+}
+
+@media (max-width:700px){
+  .image{
+    width: 80px;
+  }
+}
+
+.image{
+  width: 100px;
+  height: 100px;
+}
+.prevent{
+  width: 400px;
+  height: 200px;
+
+}
+.ca{
+ clear: none;
+  padding: 10px;
+  width: 10px;
+  float: 0;
+  border-radius: 10px;
+
+}
+.price{
+  height: 200px;
+}
+.card-tittle{
+  height: 10px;
+}
+.card-footer{
+  height: 40px;
+}
+.card{
+  width: 130px;
+  margin: 10px;
+  height: 210px;
+  
+}
+.card-body-m{
+  height: 80px;
+}
+.card-body{
+  width: 130px;
+  
+  
+ 
+  
+}
+
+.btn,span:hover{
+  color:#87ceeb;
+
+} 
+.addTocart{
+  border-radius: 50px;
+  width: 40px;
+  align-self: center;
+
+}
+
+.women{
+  margin-top: 20px;
+  background:#87ceeb ;
+}
+.men{
+  margin-top: 100px;
+}
+
+.no-item{
+  margin-top: 200px;
+  
+}
+.pay-1{
+  border-radius: 30%;
+}

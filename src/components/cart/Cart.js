@@ -144,15 +144,15 @@ class Cart extends Component {
                     <div className="container cart  animated swing">
                         <h4 className="  btn-info" > Cost of {number_of_item}  Item (s) {"N" + cost}   </h4>
                                 <Alert isOpen={this.state.order} >{this.state.msg} </Alert>
-                        <div className="row">
+                        <div className="product-row">
                             {items.map((item, key) =>
-                                <div key={key} className="col ">
-                                    <span className="card  bg-light">
+                                <div key={key} className="product-col  ">
+                                    <span className="card product-cart  card-body">
                                         <p className="card-title"> {item.product_desc} {QTY} </p>
                                         <span className="card-body-m"> 
                                         <img className="image  " src={URL + item.image}  alt={item.image} />
                                         </span>
-                                        <span className="price card-footer" >
+                                        <span className="price " >
                                         <b className=" btn-info  ca"  onClick={() => this.RemoveCart(item.product_id)} >  <strong> - </strong>  </b>
                                         </span>
                                         <span className=" card-footer">   &#8358;{ item.product_price} </span> 

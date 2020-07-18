@@ -10,8 +10,8 @@ import gallary5 from "./images/gallary5.jpeg";
 const Gallary = () => {
     return (  
       <div className="container">
-        <div className="row ">
-          <div className="col">
+        <div className="product-row ">
+          <div className="product-gallary">
             <div id="slider" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active ">
@@ -32,7 +32,7 @@ const Gallary = () => {
               </div>
             </div>
           </div>
-          <div className="col ">
+          <div className="product-gallary ">
             <div id="slider" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active ">

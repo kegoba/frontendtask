@@ -85,20 +85,26 @@ class Home extends Component {
             <div>
               <div className="container gallary">
                 <Gallary />
-                
               </div>
               <p className="women text-right btn-info">
-                <span onClick={this.handleMenRoute}> Get All Men's Wear.... </span>
+                <span onClick={this.handleMenRoute}>
+                  {" "}
+                  Get All Men's Wear....{" "}
+                </span>
               </p>
               <div className="container animated swing">
                 <Alert color="info" isOpen={this.state.show}>
                   Item Added To Cart
                 </Alert>
-                <div className="row">
+                <div className="product-row">
                   {men.map((item, key) => (
-                    <div key={key} className="col">
-                      <span className="card card-body bg-light">
-                        <img className="image " src={URL + item.image} alt={item.image}/>
+                    <div key={key} className="product-col ">
+                      <span className=" card card-body">
+                        <img
+                          className="image "
+                          src={URL + item.image}
+                          alt={item.image}
+                        />
                         <span
                           onClick={() => this.handleToCart(item.product_id)}
                           className=" addTocart  btn-info"
@@ -114,28 +120,35 @@ class Home extends Component {
             </div>
             <div>
               <p className="women btn-info text-right">
-                <span onClick={this.handleWomenRoute}> Get All Women's Wear......</span>
+                <span onClick={this.handleWomenRoute}>
+                  {" "}
+                  Get All Women's Wear......
+                </span>
               </p>
               <div className="container   animated swing">
                 <Alert color="info" isOpen={this.state.show}>
                   Item Added To Cart
                 </Alert>
-                <div className="row">
+                <div className="product-row">
                   {women.map((item, key) => (
                     <div
                       key={key}
-                      className="col"
+                      className="product-col "
                       onClick={() => this.handleToCart(item.product_id)}
                     >
                       <span className="card card-body">
-                        <img className="image " src={URL + item.image} alt={item.image} />
+                        <img
+                          className="image "
+                          src={URL + item.image}
+                          alt={item.image}
+                        />
                         <span
                           onClick={() => this.handleToCart(item.product_id)}
                           className=" addTocart  btn-info"
                         >
                           +
                         </span>
-                        &#8358;{ item.product_price}
+                        &#8358;{item.product_price}
                       </span>
                     </div>
                   ))}

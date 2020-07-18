@@ -63,11 +63,11 @@ class Men extends Component{
               <Alert color="info" isOpen={this.state.show}>
                 Item Added To Cart
             </Alert>
-              <div className="row">
+              <div className="product-row">
                 {men.map((item, key) => (
                   <div
                     key={key}
-                    className="col"
+                    className="product-col"
                    
                   >
                     <span className="card card-body">

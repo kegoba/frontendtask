@@ -63,11 +63,11 @@ class Women extends Component {
               <Alert color="info" isOpen={this.state.show}>
                 Item Added To Cart
               </Alert>
-              <div className="row">
+              <div className="product-row">
                 {women.map((item, key) => (
                   <div
                     key={key}
-                    className="col"
+                    className="product-col"
                    
                   >
                     <span className="card card-body">
@@ -77,7 +77,7 @@ class Women extends Component {
                         alt={item.image}
                       />
                       <span className=" addTocart btn-info" onClick={() => this.handleToCart(item.product_id)}> + </span>
-                      &#8358;{ + item.product_price}
+                      { + item.product_price}
                     </span>
                   </div>
                 ))}

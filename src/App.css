@@ -123,7 +123,7 @@ margin-top: 50px;
   height: 100px;
 }
 .prevent{
-  width: 400px;
+  width: 300px;
   height: 200px;
 
 }
@@ -175,6 +175,22 @@ margin-top: 50px;
 .pay-1{
   border-radius: 30%;
 }
+.product-gallary{
+  width: 280px;
+  margin-right: 50px;
+  margin-left: 150px;
+  padding: 10px;
+
+}
+@media (max-width:700px){
+.product-gallary{
+  width: 280px;
+  margin-right: 50px;
+  margin-left: 15px;
+  padding: 10px;
+
+}
+}
 
 .product-row{
   display: flex;
@@ -183,7 +199,8 @@ margin-top: 50px;
 
 .product-col{
   width: 100px;
-  margin-right: 50px;
+  margin-right: 20px;
+   margin-left: 20px;
 
 }
 .product-cart{

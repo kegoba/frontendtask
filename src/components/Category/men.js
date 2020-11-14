@@ -5,7 +5,7 @@ import { AddToCart } from "../reducer/Action"
 import { connect } from "react-redux"
 import { GetProduct } from "../reducer/ProductReducer"
 import {Alert} from "reactstrap"
-
+import {NotificationManager} from "react-notifications"
 
 const MapStateToProps = (state)=>{
     return state
@@ -43,13 +43,13 @@ class Men extends Component{
     handleToCart(product_id, name, price) {
         this.props.AddToCart(product_id)
         this.setState({show: true}, ()=>{
-     window.setTimeout(()=>{
-         this.setState({ show : false})
-     },2000)
+   
     })
      }
+Notification = ()=>{
+    NotificationManager.info("Item Added successful", "", 1000)
 
-
+}
     
 
     render(){
@@ -60,14 +60,12 @@ class Men extends Component{
 
             <div className="container men ">
               <p className=""> Men's Wear </p>
-              <Alert color="info" isOpen={this.state.show}>
-                Item Added To Cart
-            </Alert>
               <div className="product-row">
                 {men.map((item, key) => (
                   <div
                     key={key}
                     className="product-col"
+                    onClick={() => this.handleToCart(item.product_id)}
                    
                   >
                     <span className="card card-body">
@@ -76,7 +74,7 @@ class Men extends Component{
                         src={URL + item.image}
                         alt={item.image}
                       />
-                      <span className=" addTocart  btn-info" onClick={() => this.handleToCart(item.product_id)}> + </span>
+                      <span className=" addTocart  btn-info" onClick={(() => this.handleToCart(item.product_id), this.Notification)}> + </span>
                       &#8358;{ item.product_price}
                     </span>
                   </div>

@@ -121,10 +121,12 @@ export const AppReducer = (state=initial_state, action)=>{
            }
        }
        if (action.type === PAY){
-           let amount_to_credit = action.amount
+           let paymentDetail = action.paymentDetail;
+          // console.log("redux", paymentDetail)
            return {
-               ...state, amount_to_credit : amount_to_credit
-           }
+             ...state,
+             paymentDetail: paymentDetail,
+           };
        }
        else {
         return state;

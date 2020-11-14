@@ -9,6 +9,16 @@ import PayInput from "../payment/payInput"
 import Addproduct from "../cart/addproduct"
 import Men from "../Category/men"
 import Women from "../Category/women"
+import SuccessPage from "../payment/success"
+import { connect}  from "react-redux"
+
+const MapStateToProps = (state)=>({
+  cart : state.cart
+})
+
+const MapDispatchToProps = (dispatch)=>({
+
+})
 
 
 class Menu extends Component {
@@ -17,19 +27,18 @@ class Menu extends Component {
         this.state = {
             user: [],
             isLogin : false,
-            
-
         }
-
     }
     
     render() {
         //const user  = this.state.user.first_name
+        const number_of_item_in_cart = this.props.cart.length;
+      console.log(number_of_item_in_cart,  "menu page")
         return (
           <Router className="container text-center">
             <div className="menu">
-              <nav className="navbar fixed-top menu navbar-expand-lg navbar-light ">
-                <Link className="navbar-brand" to={"/"}> Home</Link>
+              <nav className="navbar menu navbar-expand-lg navbar-light ">
+                <Link className="navbar-brand fa fa-home" to={"/"}> </Link>
                 <button
                   type="button"
                   className="navbar-toggler"
@@ -40,11 +49,6 @@ class Menu extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="dropDrown">
                   <ul className="navbar-nav ">
-                    <li className="nav-item text-left">
-                      <Link to={"/cart"} className="nav-link">
-                        Cart
-                      </Link>
-                    </li>
                     <li className="nav-item text-left">
                       <Link to={"/women"} className="nav-link">
                         Women' Wear
@@ -60,12 +64,24 @@ class Menu extends Component {
                         Fund Your Wallet
                       </Link>
                     </li>
+                    <li className="nav-item cart-menu">
+                      <Link to={"/cart"} className="nav-link fa fa-cart-plus">
+                        Cart
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </nav>
             </div>
             <div className="name">
-              <div className="container"></div>
+              <Link to={"/cart"}>
+                <div className="cart-menu-item">
+                  <i>
+                    {number_of_item_in_cart}
+                  </i>
+                </div>
+
+              </Link>
             </div>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -77,10 +93,11 @@ class Menu extends Component {
               <Route path="/women" component={Women} />
               <Route path="/login" component={Login} />
               <Route path="/reg" component={Reg} />
+              <Route path="/success" component={SuccessPage} />
             </Switch>
           </Router>
         );
     }
 }
 
-export default Menu;
+export default connect(MapStateToProps, MapDispatchToProps) (Menu);

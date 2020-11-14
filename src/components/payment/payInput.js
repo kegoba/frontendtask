@@ -1,9 +1,10 @@
 import React ,{Component} from "react"
 import { Link, useLocation} from "react-router-dom";
-
+//import {usePaystackPayment} from "react-paystack";
 import {connect} from "react-redux"
 import { Make_payment } from "../reducer/Action" // ../reducer/Action";
 import {Alert} from "reactstrap"
+import {KEY} from "../asset/asset"
 
 
 const MapStateToProps = (state)=>({
@@ -34,6 +35,12 @@ class PayInput extends Component{
         console.log(this.state.amount)
     }
     handlePay=(amount)=>{
+        const paymentDetail = {
+          reference: new Date().getTime(),
+          email: this.props.email,
+          amount: this.state.amount * 100,
+          publicKey: KEY,
+        };
         let email = this.props.email
         if (!email){
             //const location = useLocation
@@ -52,7 +59,7 @@ class PayInput extends Component{
                 })
             } else {
 
-                this.props.Make_payment(amount)
+                this.props.Make_payment(paymentDetail);
                 this.props.history.push("/payment")
 
             }
@@ -85,7 +92,7 @@ class PayInput extends Component{
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                 <p className="btn pay-1 btn-info"  onClick={()=>this.handlePay(this.state.amount)}>  Proceed >>>   </p>
+                                 <p className="btn pay-1 btn-info"  onClick={()=>this.handlePay(this.state.amount)}>  {"Proceed >>>"}   </p>
                             
                             </div>
                         </div>

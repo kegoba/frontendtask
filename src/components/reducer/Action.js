@@ -40,7 +40,7 @@ export const Login_action =(user)=>({
     user
 })
 
-export const Make_payment = (amount) => ({
-    type: PAY,
-    amount
-})
+export const Make_payment = (paymentDetail) => ({
+         type: PAY,
+         paymentDetail,
+       });

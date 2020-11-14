@@ -128,7 +128,8 @@ class Cart extends Component {
     }
     render() {
        const items  = this.props.item;
-        let number_of_item = this.props.nu_of_item
+        let number_of_item = this.props.number_of_items;
+        let number_of_item_in_cart = items.length
         let QTY = this.props.product_quatity;
         const cost = this.props.cost.toFixed(2)
         return (  
@@ -142,7 +143,7 @@ class Cart extends Component {
         <div>
                     
                     <div className="container cart  animated swing">
-                        <h4 className="  btn-info" > Cost of {number_of_item}  Item (s) {"N" + cost}   </h4>
+                                <h4 className=" " > Cost of {number_of_item}  Item (s)  &#8358;{cost}   </h4>
                                 <Alert isOpen={this.state.order} >{this.state.msg} </Alert>
                         <div className="product-row">
                             {items.map((item, key) =>

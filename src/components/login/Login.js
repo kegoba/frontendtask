@@ -6,6 +6,8 @@ import {URL} from "../asset/asset"
 import axios from "axios";
 import {Login_action} from "../reducer/Action"
 import "./index.css";
+
+import { NotificationManger} from "react-notifications"
 //import Auth from "../Auth/auth";
 
 const MapStateToProps = (state)=>({
@@ -34,6 +36,7 @@ class Login extends Component {
     };
   }
 
+  
   onchangeEmail(event) {
     this.setState({email: event.target.value,});
   }

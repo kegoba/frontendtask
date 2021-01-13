@@ -26,6 +26,8 @@
   margin-bottom: 2%;
 
 }
+
+
  .login-sm{
   margin-left: 100px ;
 
@@ -185,8 +187,8 @@ margin-top: 200px;
 @media (max-width:700px){
 .product-gallary{
   width: 280px;
-  margin-right: 50px;
-  margin-left: 15px;
+  margin-right: 0px;
+  margin-left: 35px;
   padding: 10px;
 
 }

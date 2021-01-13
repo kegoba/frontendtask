@@ -8,6 +8,8 @@ import Menu from "./components/statics/menu"
 
 
 function App() {
+
+  //document.body.style="background-color:black"
   return (
     <div className="App" >
       <NotificationContainer/>

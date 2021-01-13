@@ -34,12 +34,14 @@ class PayInput extends Component{
 
         console.log(this.state.amount)
     }
-    handlePay=(amount)=>{
+    handlePay=()=>{
+        const {amount} = this.state
         const paymentDetail = {
           reference: new Date().getTime(),
           email: this.props.email,
-          amount: this.state.amount * 100,
+          amount: amount * 100,
           publicKey: KEY,
+          view_amount : amount,
         };
         let email = this.props.email
         if (!email){

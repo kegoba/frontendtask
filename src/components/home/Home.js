@@ -45,15 +45,13 @@ class Home extends Component {
       let data = resp.data;
       let women = data.filter((item) => item.product_category === "WOMEN");
       let men = data.filter((item) => item.product_category === "MEN");
-      let a = women.slice(1, 6);
-
-      console.log("sliec data", a);
+      let women_wear = women.slice(1, 7);
+      let men_wear = women.slice(1, 7);
       this.setState({
         items: data,
-        men: men,
-        women: women,
+        men: men_wear,
+        women: women_wear,
       });
-      console.log(this.state.items);
     });
   }
 

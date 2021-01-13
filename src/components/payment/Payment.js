@@ -51,7 +51,7 @@ function Payment() {
         <div className="row bg-info">
           <div className="col ">  {paymentDetail.email} </div>
           <div className="col"> {paymentDetail.reference}</div>
-          <div className="col"> {paymentDetail.amount}</div>
+          <div className="col"> {paymentDetail.view_amount}</div>
         </div>
       </div>
       <PaymentButton  className="Pay"/>

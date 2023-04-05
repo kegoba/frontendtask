@@ -13,6 +13,9 @@ class Reg extends Component {
       password: "",
       phone : "",
       error : false,
+      registering : false,
+      registered : true,
+      msg : ""
     };
   }
   onchangeName = (e) => {
@@ -40,20 +43,37 @@ class Reg extends Component {
     const {name, email, password, phone} = this.state
     if ((name.length >4) && (email.length> 4) && (password.length>4) && (phone.length>4)){
       const postdata = { name: name, email: email, password: password, phone: phone };
+      this.setState({
+        registering:true,
+        registered :false
+      })
       Axios.post(URL + "/register/", postdata)
         .then((resp) => {
           if (resp.status === 200) {
             this.props.Login_action(resp.data);
             this.setState({ user: resp.data })
-
-
+            this.setState({
+              registering: false,
+              registered: true
+            })
             this.props.history.push("/login")
           }
         })
         .catch((err) => {
+          this.setState({
+            registering: false,
+            registered: true,
+            msg : "Please Enter Correct Information",
+            error : true
+          })
         })
     } else{
-      this.setState({ error: true }, () => {
+      this.setState({ 
+        error: true,
+        msg : "Unable To Complete Registration",
+        registering: false,
+        registered: true,
+      }, () => {
         window.setTimeout(()=>{
           this.setState({
             error : false
@@ -69,6 +89,7 @@ class Reg extends Component {
     this.props.history.push("/login")
   }
   render() {
+    let {registered, registering, msg} = this.state
     return (
       <div>
         <div className="container reg-login">
@@ -85,7 +106,7 @@ class Reg extends Component {
             </div>
           </div>
         </div>
-        <Alert isOpen={this.state.error} color="danger"> Please Enter a Valid Data </Alert>
+        <Alert isOpen={this.state.error} color="danger"> {msg} </Alert>
         <div className=" container login-form text-center">
           <div className="container">
             <div className="row">
@@ -143,7 +164,8 @@ class Reg extends Component {
                   className="btn btn-info"
                   onClick={this.handleSubmit}
                 >
-                  Register
+                {registering && <i className="fa fa-spinner"/> }
+                {registered && <i> Register </i>}
                 </button>
               </div>
             </div>

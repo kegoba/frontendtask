@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import {Alert} from "reactstrap"
 import {connect} from "react-redux"
 import {URL} from "../asset/asset"
@@ -7,7 +7,7 @@ import axios from "axios";
 import {Login_action} from "../reducer/Action"
 import "./index.css";
 
-import { NotificationManger} from "react-notifications"
+//import { NotificationManger} from "react-notifications"
 //import Auth from "../Auth/auth";
 
 const MapStateToProps = (state)=>({
@@ -30,7 +30,8 @@ class Login extends Component {
       user: [],
       email: "",
       password: "",
-      isLogin: false,
+      logining: false,
+      login : true,
       error : false,
       message : "",
     };
@@ -46,6 +47,11 @@ class Login extends Component {
 
   handlesubmit = () => {
     const { email, password} = this.state
+    const postdata = {
+         email: email,
+         password: password,
+       };
+    const prev = this.props.location.state || "/"
     if (email.length < 5 && password.length < 3){
       this.setState({error : true, message : "Please Enter A Valid Data"},()=>{
           window.setTimeout(()=>{
@@ -55,30 +61,42 @@ class Login extends Component {
         }, 3000)
       })
     } else {
-    const postdata = {email: email, password: password, };
-    const prev = this.props.location.state || {prev : {pathname : "/"} }
+      this.setState({
+        logining: true,
+        login : false
+
+      })
+      console.log(this.state.logining)
     axios.post( URL + "/login/", postdata)
         .then((resp) => {
           console.log(resp.status)
           if (resp.status === 200){
             this.props.Login_action(resp.data);
-            this.setState({user : resp.data})
-
+            this.setState({
+              logining: false,
+              login : true,
+              user : resp.data
+            })
+             
             
-            this.props.history.push(prev)
+            this.props.history.push(prev,  "/")
         }
         else if ( resp.status === 300){
-        this.setState({error: true, message: "InValid Data"}, () => {
+        this.setState({error: true, message: "Incorrect Password or Username"}, () => {
             window.setTimeout(() => {
             this.setState({error: false})
           }, 3000)
         })} 
       })
       .catch( (err)=> {
-        this.setState({ error: true,message: "Error While Trying To  Login"}, 
+        this.setState({ error: true,
+          login : true,
+          logining : false,
+          message: "Error While Trying To  Login"}, 
         () => {
           window.setTimeout(() => {
-          this.setState({error: false})
+          this.setState({error: false
+          })
         },3000)})
       });
     }
@@ -93,6 +111,7 @@ class Login extends Component {
 
 
   render() {
+  const  {logining, login} = this.state
     return (
       <div className="">
         <div className="container reg-login">
@@ -145,7 +164,9 @@ class Login extends Component {
                   className="btn btn-info"
                   onClick={this.handlesubmit}
                 >
-                  Login
+                  {logining && <i className="fa fa-spinner" />}
+                  {login && <i> Login </i>} 
+                  
                 </button>
               </div>
             </div>

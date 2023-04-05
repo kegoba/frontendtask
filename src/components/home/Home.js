@@ -1,18 +1,20 @@
 import React, { Component } from "react"
 import {connect} from "react-redux"
-import {  Link } from 'react-router-dom'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import {AddToCart} from "../reducer/Action"
 import axios from "axios"
 import {GetProduct} from "../reducer/ProductReducer"
 import {URL} from "../asset/asset"
-import {Alert} from "reactstrap"
-import Gallary from "../gallary/Gallary"
+import { Gallary} from "../gallary/Gallary"
 import {NotificationManager} from "react-notifications"
 
 const MapStateToProps =(state)=>{
     return {
         items : state.item ,
-        cart : state.cart
+        cart : state.cart,
+        user : state.user
     }
     
 }
@@ -41,12 +43,14 @@ class Home extends Component {
 
   componentDidMount() {
     GetProduct();
+    let user = this.props.user
+    console.log(user["email"], "user from home")
     axios.get(URL + "/getproduct/").then((resp) => {
       let data = resp.data;
       let women = data.filter((item) => item.product_category === "WOMEN");
       let men = data.filter((item) => item.product_category === "MEN");
       let women_wear = women.slice(1, 7);
-      let men_wear = women.slice(1, 7);
+      let men_wear = men.slice(1, 7);
       this.setState({
         items: data,
         men: men_wear,
@@ -75,6 +79,32 @@ class Home extends Component {
   render() {
     let women = this.state.women;
     let men = this.state.men;
+    const men_category = () =>
+      men.map((item , key)=> (
+        <div
+          key={key}
+          className="product-col "
+          onClick={() => this.handleToCart(item.product_id)}
+        >
+          <span className=" ">
+            <img
+              className="image "
+              src={URL + item.image}
+              alt={item.image}
+            />
+            <span
+              onClick={
+                (() => this.handleToCart(item.product_id),
+                  this.Notification)
+              }
+              className=" addTocart  btn-info"
+            >
+              +
+                    </span>
+            &#8358;{Number(item.product_price).toLocaleString()}
+          </span>
+        </div>
+      ));
 
     return (
       <div>
@@ -82,10 +112,38 @@ class Home extends Component {
           <div className="container gallary">
             <Gallary />
           </div>
+          <p className="women text-center btn-info">
+            <span onClick={this.handleMenRoute}> Feature Products.... </span>
+          </p>
+          <div className="container mobile_view">
+            <Slider
+            className="featured_product"
+              dots={false}
+              slidesToShow={2}
+              slidesToScroll={1}
+              autoplay={true}
+              autoplaySpeed={3000}
+            >
+              {men_category()}
+            </Slider>
+          </div>
+          <div className="container desktop_view">
+            <Slider
+              className="featured_product"
+              dots={false}
+              slidesToShow={4}
+              slidesToScroll={1}
+              autoplay={true}
+              autoplaySpeed={3000}
+            >
+              {men_category()}
+            </Slider>
+          </div>
           <p className="women text-right btn-info">
             <span onClick={this.handleMenRoute}> Get All Men's Wear.... </span>
           </p>
           <div className="container animated swing">
+            {men.length ? 
             <div className="product-row">
               {men.map((item, key) => (
                 <div
@@ -108,11 +166,14 @@ class Home extends Component {
                     >
                       +
                     </span>
-                    &#8358;{item.product_price}
+                    &#8358;{Number(item.product_price).toLocaleString()}
                   </span>
                 </div>
               ))}
             </div>
+            :
+            <h4> Loading product ... </h4>
+            }
           </div>
         </div>
         <div>
@@ -122,7 +183,11 @@ class Home extends Component {
             </span>
           </p>
           <div className="container   animated swing">
+            {!women.length ?
+              <h4> Loading Product ..... </h4>
+              :
             <div className="product-row">
+
               {women.map((item, key) => (
                 <div
                   key={key}
@@ -144,12 +209,15 @@ class Home extends Component {
                     >
                       +
                     </span>
-                    &#8358;{item.product_price}
+                    &#8358;{Number(item.product_price).toLocaleString()}
                   </span>
                 </div>
               ))}
+
             </div>
+            }
           </div>
+            
         </div>
       </div>
     );

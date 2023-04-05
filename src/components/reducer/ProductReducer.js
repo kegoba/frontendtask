@@ -1,11 +1,12 @@
 import {URL} from "../asset/asset"
-import { ADD_TO_CART, REMOVE_ITEM ,BALANCE ,ADD_QTY, SUB_QTY, LOGIN, PAY}  from "./cart-actions"
+import { ADD_TO_CART, REMOVE_ITEM ,BALANCE ,ADD_QTY, SUB_QTY, LOGIN, PAY, LOGOUT}  from "./cart-actions"
 import axios from "axios"
 
  const initial_state = {
     user:[],
     item:[],
     cart:[],
+    cart_info : { total_cost: 0, number_of_items: 0 },
     number_of_items : 0,
     total_cost : 0,
     balance: 0,
@@ -29,6 +30,8 @@ export const AppReducer = (state=initial_state, action)=>{
     if(action.type === ADD_TO_CART){
         let cartItem = state.item.find(item => item.product_id === action.product_id)
         //console.log(cartItem ,"cartiem")
+        let user = action.user
+        console.log("user from redux", user)
         
         let item_exist = state.cart.find(item => item.product_id === action.product_id)
 
@@ -40,13 +43,13 @@ export const AppReducer = (state=initial_state, action)=>{
             }
         }else{
 
-            let new_cost = parseInt(state.total_cost) + parseInt(cartItem.product_price)
-            let number_of_item = state.number_of_items + 1
+            let new_cost = parseInt(state.cart_info.total_cost) + parseInt(cartItem.product_price)
+            let number_of_item = state.cart_info.number_of_items + 1
+            let cart_info ={ total_cost : new_cost, number_of_items : number_of_item}
             
             return{
                 ...state , cart : [...state.cart , cartItem],
-                total_cost : new_cost,
-                number_of_items :number_of_item,
+                cart_info: cart_info
                 
             }
         }
@@ -55,15 +58,15 @@ export const AppReducer = (state=initial_state, action)=>{
     if (action.type === REMOVE_ITEM){
         let item_to_remove = state.cart.find(item => item.product_id === action.product_id)
         let item_exist = state.cart.filter(item => item.product_id !== action.product_id)
-        let new_cost = (state.total_cost) - (item_to_remove.product_price) 
-         let number_of_item = state.number_of_items -= 1
+        let new_cost = (state.cart_info.total_cost) - (item_to_remove.product_price) 
+        let number_of_item = state.cart_info.number_of_items -= 1
+         let cart_info = { total_cost: new_cost, number_of_items: number_of_item }
         
         
         return {
             ...state, 
             cart : item_exist,
-            number_of_items : number_of_item,
-            total_cost : new_cost,
+            cart_info: cart_info,
            
         }
         
@@ -112,12 +115,18 @@ export const AppReducer = (state=initial_state, action)=>{
        
       }
        if (action.type === LOGIN){
-           let user_id = action.user.user_id;
-            let email = action.user.email
-          
+            let user = action.user
            return {
-               ...state, user : [...state.user],
-               email : email, user_id : user_id
+               ...state, user : user,
+              
+           }
+       }
+       if (action.type === LOGOUT) {
+           let user = undefined
+           console.log("log out")
+           return {
+               ...state, user: user,
+
            }
        }
        if (action.type === PAY){

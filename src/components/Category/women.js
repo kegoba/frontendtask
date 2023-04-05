@@ -4,7 +4,7 @@ import { URL } from "../asset/asset"
 import { AddToCart } from "../reducer/Action"
 import { connect } from "react-redux"
 import { GetProduct } from "../reducer/ProductReducer"
-import {Alert} from "reactstrap"
+//import {Alert} from "reactstrap"
 import {NotificationManager} from "react-notifications"
 
 
@@ -64,6 +64,7 @@ class Women extends Component {
            
             <div className="container men ">
               <p className=""> Women's Wear </p>
+              {women.length? 
               <div className="product-row">
                 {women.map((item, key) => (
                   <div
@@ -84,6 +85,9 @@ class Women extends Component {
                   </div>
                 ))}
               </div>
+              :
+              <h4> Loading Product... </h4>
+              }
             </div>
           </div>
         );

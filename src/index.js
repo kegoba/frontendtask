@@ -5,10 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import "font-awesome/css/font-awesome.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import{AppReducer} from "./components/reducer/ProductReducer"
-
-import {createStore} from "redux";
 import {Provider} from "react-redux"
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './components/reducer/PersistStore'
+//<PersistGate loading={null} persistor={persistor}> // null passed to loading, persistor is being used here
+//    <App />
+//</PersistGate>
 
 
 
@@ -16,9 +18,15 @@ import {Provider} from "react-redux"
 
 
 
-const store = createStore(AppReducer)
+//const store = createStore(AppReducer)
 
-ReactDOM.render(<Provider store={store}> <App />  </Provider>, document.getElementById('root'));
+ReactDOM.render(
+   <Provider store={store}>
+     <PersistGate loading={null} persistor={persistor}>
+       <App />
+    </PersistGate>
+   </Provider>,
+    document.getElementById('root'));
 
 
 serviceWorker.unregister();

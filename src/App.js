@@ -1,30 +1,24 @@
-import React from 'react';
-import './App.css';
-import './animate.css';
-import "react-notifications/lib/notifications.css";
-import {NotificationContainer} from 'react-notifications';
-import Footer from "./components/statics/footer"
-import Menu from "./components/statics/menu"
+import React from "react";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./components/menu/navbar";
+import Home from "./components/pages/home";
+import "./App.css";
 
 
 function App() {
-
-  //document.body.style="background-color:black"
   return (
-    <div className="App" >
-      <NotificationContainer/>
-      
-     <div className="">
-       <Menu/>
-     </div>
-
-      <div className='footer'>
-        <Footer />
-      </div>
-    </div>
-     
-    
+    <Router>
+      <Navbar />
+      <Home/>
+      <Switch>
+        <Route exact path="/home" component={Home} />
+        <Route path="/contact"  />
+        <Route path="/faq"  />
+      </Switch>
+    </Router>
   );
 }
-
 export default App;
+
+//git remote set-url origin https://github.com/kegoba/frontendtask.git

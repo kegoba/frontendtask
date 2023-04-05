@@ -4,7 +4,6 @@ import {URL} from "../asset/asset"
 import { AddToCart } from "../reducer/Action"
 import { connect } from "react-redux"
 import { GetProduct } from "../reducer/ProductReducer"
-import {Alert} from "reactstrap"
 import {NotificationManager} from "react-notifications"
 
 const MapStateToProps = (state)=>{
@@ -60,6 +59,7 @@ Notification = ()=>{
 
             <div className="container men ">
               <p className=""> Men's Wear </p>
+              {men.length? 
               <div className="product-row">
                 {men.map((item, key) => (
                   <div
@@ -80,6 +80,9 @@ Notification = ()=>{
                   </div>
                 ))}
               </div>
+              : 
+              <h4> Loading Product... </h4>
+              }
             </div>
           </div>
         );

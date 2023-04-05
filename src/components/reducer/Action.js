@@ -1,5 +1,5 @@
 
-import { ADD_TO_CART, REMOVE_ITEM, BALANCE, SUB_QTY, ADD_QTY, LOGIN, PAY} from './cart-actions'
+import { ADD_TO_CART, REMOVE_ITEM, BALANCE, SUB_QTY, ADD_QTY, LOGIN, PAY , LOGOUT} from './cart-actions'
 
 export const AddToCart = (product_id)=>{
     return{
@@ -39,7 +39,10 @@ export const Login_action =(user)=>({
     type  : LOGIN,
     user
 })
-
+export const Logout_action=(user)=>({
+    type : LOGOUT,
+    user
+})
 export const Make_payment = (paymentDetail) => ({
          type: PAY,
          paymentDetail,

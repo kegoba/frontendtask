@@ -6,3 +6,4 @@ export const SUB_QTY      =  "SUB_QTY";
 export const ADD_QTY      =  "ADD_QTY";
 export const LOGIN        = "LOGIN";
 export const PAY          = "PAY";
+export const LOGOUT       =  "LOGOUT"  

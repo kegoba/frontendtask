@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import {URL} from "../asset/asset"
-import { RemoveItem, BALANCE, Add_qty, Sub_qty, Login_action} from "../reducer/Action"
+import { RemoveItem, Add_qty, Sub_qty, } from "../reducer/Action"
 import { connect } from "react-redux"
 import {Alert }from "reactstrap"
 //import Payment from "./Payment"
@@ -12,7 +12,8 @@ const MapStateToProps = (state)=>{
         number_of_item : state.number_of_items,
         product_quatity : state.product_quatity,
         email: state.email,
-        user_id: state.user_id
+        user_id: state.user_id,
+        cart_info : state.cart_info
         
     }
 }
@@ -128,10 +129,9 @@ class Cart extends Component {
     }
     render() {
        const items  = this.props.item;
-        let number_of_item = this.props.number_of_items;
-        let number_of_item_in_cart = items.length
-        let QTY = this.props.product_quatity;
-        const cost = this.props.cost.toFixed(2)
+       let number_of_item = this.props.cart_info['number_of_items'];
+       // let QTY = this.props.product_quatity;
+        const cost = this.props.cart_info['total_cost'].toFixed(2)
         return (  
                
         <div> 
@@ -143,25 +143,27 @@ class Cart extends Component {
         <div>
                     
                     <div className="container cart  animated swing">
-                                <h4 className=" " > Cost of {number_of_item}  Item (s)  &#8358;{cost}   </h4>
+                               
                                 <Alert isOpen={this.state.order} >{this.state.msg} </Alert>
                         <div className="product-row">
                             {items.map((item, key) =>
                                 <div key={key} className="product-col  ">
-                                    <span className="card product-cart  card-body">
-                                        <p className="card-title"> {item.product_desc} {QTY} </p>
-                                        <span className="card-body-m"> 
+                                    <span className=" product-cart ">
+                                       
+                                        <span className=" card card-body"> 
                                         <img className="image  " src={URL + item.image}  alt={item.image} />
-                                        </span>
-                                        <span className="price " >
-                                        <b className=" btn-info  ca"  onClick={() => this.RemoveCart(item.product_id)} >  <strong> - </strong>  </b>
-                                        </span>
-                                        <span className=" card-footer">   &#8358;{ item.product_price} </span> 
+                                    
+                                        
+                                        <span className=" removeFromCart  btn-info" onClick={() => this.RemoveCart(item.product_id)}> - </span>
+                                      
+                                        <span className="">   &#8358;{ item.product_price} </span> 
+                                     </span>
                                      </span>
                                 </div>
                                 
                             )}
                         </div>
+                        <h4 className=" " > Cost of {number_of_item}  Item (s)  &#8358;{cost.toLocaleString()}   </h4>
                     </div>
                     <div className="constainer pay">
                         <div className="row">

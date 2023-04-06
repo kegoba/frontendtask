@@ -21,5 +21,5 @@ function App() {
 }
 export default App;
 
-//git remote set-url origin https://github.com/kegoba/frontendtask.git
+
 
